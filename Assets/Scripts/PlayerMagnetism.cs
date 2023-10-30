@@ -45,7 +45,7 @@ public class PlayerMagnetism : MonoBehaviour
                     if (rb != null)
                     {
                         Vector2 direction = transform.position - collider.transform.position;
-                        rb.AddForce(direction.normalized * 10f, ForceMode2D.Impulse);
+                        rb.AddForce(direction.normalized * magnetForce, ForceMode2D.Impulse);
                     }
                 }
                 else if ((isAttracting && collider.CompareTag("SouthPolarity")) || (isRepelling && collider.CompareTag("NorthPolarity")))
@@ -57,7 +57,7 @@ public class PlayerMagnetism : MonoBehaviour
                     if (rb != null)
                     {
                         Vector2 direction = collider.transform.position - transform.position;
-                        rb.AddForce(direction.normalized * 10f, ForceMode2D.Impulse);
+                        rb.AddForce(direction.normalized * magnetForce, ForceMode2D.Impulse);
                     }
                 }
             }
