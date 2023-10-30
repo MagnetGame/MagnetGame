@@ -39,7 +39,7 @@ public class PlayerMagnetism : MonoBehaviour
                 if ((isAttracting && collider.CompareTag("NorthPolarity")) || (isRepelling && collider.CompareTag("SouthPolarity")))
                 {
                     Debug.Log("North Mode");
-                    DrawLine(collider.transform.position, Color.red);
+                   // DrawLine(collider.transform.position, Color.red);
 
                     rb = collider.GetComponent<Rigidbody2D>();
                     if (rb != null)
@@ -51,7 +51,7 @@ public class PlayerMagnetism : MonoBehaviour
                 else if ((isAttracting && collider.CompareTag("SouthPolarity")) || (isRepelling && collider.CompareTag("NorthPolarity")))
                 {
                     Debug.Log("South Mode");
-                    DrawLine(collider.transform.position, Color.blue);
+                  //  DrawLine(collider.transform.position, Color.blue);
 
                     rb = collider.GetComponent<Rigidbody2D>();
                     if (rb != null)
