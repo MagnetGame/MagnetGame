@@ -1,15 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMagnetism : MonoBehaviour
 {
     public float magnetRadius = 5f;
     public float magnetForce = 2f;
+    public float maxAttractionDistance = 3f; // Maximum distance for attraction.
+    public float breakingForce = 1f; // Force applied to break attraction.
+    public LineRenderer lineRendererPrefab;
+    private LineRenderer currentLineRenderer;
     private bool isAttracting = false;
     private bool isRepelling = false;
-    private Rigidbody2D rb;
-    
+    private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
+    public SpriteRenderer spriteRenderer; //sprite rendered for player
+
+    private enum playerState
+    {
+        NorthMode,
+        SouthMode,
+        Neutral
+    } //TODO swap this over to states
+
+    void Start()
+    {
+        playerRigidbody = GetComponent<Rigidbody2D>(); // Assuming the player has the Rigidbody2D component on the same GameObject as this script.
+    }
 
     void Update()
     {
@@ -40,24 +54,66 @@ public class PlayerMagnetism : MonoBehaviour
                 {
                     Debug.Log("North Mode");
 
-                    rb = collider.GetComponent<Rigidbody2D>();
-                    if (rb != null)
+                    Vector2 direction = transform.position - collider.transform.position;
+                    float distance = direction.magnitude;
+
+                    if (distance > maxAttractionDistance)
                     {
-                        Vector2 direction = transform.position - collider.transform.position;
-                        rb.AddForce(direction.normalized * magnetForce, ForceMode2D.Impulse);
+                        // If the object is too far away, apply a breaking force to release it.
+                        Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+                        if (objectRigidbody != null)
+                        {
+                            Vector2 breakForce = direction.normalized * breakingForce;
+                            objectRigidbody.AddForce(breakForce, ForceMode2D.Impulse);
+                        }
+                    }
+                    else //out side max attraction distance then we try to apply force
+                    {
+                        Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force to player 
+                        playerRigidbody.AddForce(force, ForceMode2D.Impulse);
+
+                        Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+                        if (objectRigidbody != null)
+                        {
+                            objectRigidbody.AddForce(-force, ForceMode2D.Impulse); // half hte force on object
+                        }
                     }
                 }
                 else if ((isAttracting && collider.CompareTag("SouthPolarity")) || (isRepelling && collider.CompareTag("NorthPolarity")))
                 {
                     Debug.Log("South Mode");
 
-                    rb = collider.GetComponent<Rigidbody2D>();
-                    if (rb != null)
+                    Vector2 direction = collider.transform.position - transform.position;
+                    float distance = direction.magnitude;
+                    if (distance > maxAttractionDistance)
                     {
-                        Vector2 direction = collider.transform.position - transform.position;
-                        rb.AddForce(direction.normalized * magnetForce, ForceMode2D.Impulse);
+                        // If the object is too far away, apply a breaking force to release it.
+                        Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+                        if (objectRigidbody != null)
+                        {
+                            Vector2 breakForce = direction.normalized * breakingForce;
+                            objectRigidbody.AddForce(breakForce, ForceMode2D.Impulse);
+                        }
+                    }
+                    else
+                    {
+                        Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force.
+                        playerRigidbody.AddForce(force, ForceMode2D.Impulse);
+
+                        Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+                        if (objectRigidbody != null)
+                        {
+                            objectRigidbody.AddForce(-force, ForceMode2D.Impulse); // Apply equal and opposite force to the attracted object.
+                        }
                     }
                 }
+            }
+        }
+        else
+        {
+            if (currentLineRenderer != null)
+            {
+                Destroy(currentLineRenderer.gameObject);
             }
         }
     }
