@@ -5,8 +5,8 @@ public class PlayerMagnetism : MonoBehaviour
 {
     public float magnetRadius = 5f;
     public float magnetForce = 2f;
-    public float maxAttractionDistance = 3f; // Maximum distance for attraction.
-    public float breakingForce = 1f; // Force applied to break attraction.
+    public float maxAttractionDistance = 1f; // Maximum distance for attraction.
+    public float breakingForce = .1f; // Force applied to break attraction.
     public LineRenderer lineRendererPrefab;
     private LineRenderer currentLineRenderer;
     private bool isAttracting = false;
@@ -66,22 +66,25 @@ public class PlayerMagnetism : MonoBehaviour
             {
                 if ((currentState == playerState.NorthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.SouthMode && collider.CompareTag("SouthPolarity"))) // handles push 
                 {
-                    Debug.Log("North Mode");
-
+                    
                     Vector2 direction = transform.position - collider.transform.position;
                     float distance = direction.magnitude;
 
+                    /*
                     if (distance > maxAttractionDistance)
                     {
                         // If the object is too far away, apply a breaking force to release it.
+                        
                         Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+
+                        
                         if (objectRigidbody != null)
                         {
                             Vector2 breakForce = direction.normalized * breakingForce;
                             objectRigidbody.AddForce(breakForce, ForceMode2D.Impulse);
-                        }
-                    }
-                    else 
+                        } 
+                    }*/
+                    if(true)
                     {
                         Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force to player 
                         playerRigidbody.AddForce(force, ForceMode2D.Impulse);
@@ -96,31 +99,37 @@ public class PlayerMagnetism : MonoBehaviour
                 
                 else if ((currentState == playerState.SouthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.NorthMode && collider.CompareTag("SouthPolarity"))) // handles pull
                 {
-                    Debug.Log("South Mode");
-
+                                      
                     Vector2 direction = collider.transform.position - transform.position;
                     float distance = direction.magnitude;
-                    if (distance > maxAttractionDistance)
-                    {
-                        // If the object is too far away, apply a breaking force to release it.
-                        Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
-                        if (objectRigidbody != null)
-                        {
-                            Vector2 breakForce = direction.normalized * breakingForce;
-                            objectRigidbody.AddForce(breakForce, ForceMode2D.Impulse);
-                        }
-                    }
-                    else
-                    {
-                        Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force.
-                        playerRigidbody.AddForce(force, ForceMode2D.Impulse);
 
-                        Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+                    Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+
+                    Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force.
+                    playerRigidbody.AddForce(force, ForceMode2D.Impulse);
+                    //Rigidbody2D objectRigidbody = collider.GetComponent<Rigidbody2D>();
+                    if (objectRigidbody != null)
+                    {
+                        objectRigidbody.AddForce(-force, ForceMode2D.Impulse); // Apply equal and opposite force to the attracted object.
+                    }
+                    //end of attraction code
+
+                    //begin break force code
+                    Vector2 breakDirection = Vector2.zero; // Initialize breakDirection to zero initially.
+                    if (Input.GetKeyUp("space"))
+                    {
+                        // Set the breakDirection to the upward direction.
+                        breakDirection = new Vector2(0.0f, 1.0f); // Upwards direction
+
+                        Debug.Log("Apply breaking force");
                         if (objectRigidbody != null)
                         {
-                            objectRigidbody.AddForce(-force, ForceMode2D.Impulse); // Apply equal and opposite force to the attracted object.
+                            Debug.Log("Using breaking force of " + breakingForce);
+                            Vector2 breakForce = breakDirection.normalized * breakingForce;
+                            playerRigidbody.AddForce(breakForce, ForceMode2D.Impulse);
                         }
                     }
+                    
                 }
 
             }
