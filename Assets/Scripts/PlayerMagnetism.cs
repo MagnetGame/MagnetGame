@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PlayerMagnetism : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class PlayerMagnetism : MonoBehaviour
         NorthMode,
         SouthMode,
         Neutral
-    } //TODO swap this over to states
+    }
+
+    private playerState currentState = playerState.Neutral;
 
     void Start()
     {
@@ -29,28 +32,39 @@ public class PlayerMagnetism : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            isAttracting = true;
-            isRepelling = false;
+            currentState = playerState.NorthMode;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            isAttracting = false;
-            isRepelling = true;
+            currentState = playerState.SouthMode;
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            isAttracting = false;
-            isRepelling = false;
+            currentState = playerState.Neutral;
         }
 
-        if (isAttracting || isRepelling)
+        //TODO change sprites here
+        switch (currentState)
+        {
+            case playerState.NorthMode:
+                //spriteRenderer.sprite = Resources.Load<Sprite>("NorthPlayer"); // Change to "NorthPlayer" sprite.
+                break;
+            case playerState.SouthMode:
+                //spriteRenderer.sprite = Resources.Load<Sprite>("SouthPlayer"); // Change to "SouthPlayer" sprite.
+                break;
+            case playerState.Neutral:
+                // You can set a default sprite or leave it as is.
+                break;
+        }
+
+        if (currentState == playerState.NorthMode || currentState == playerState.SouthMode)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
             foreach (Collider2D collider in colliders)
             {
-                if ((isAttracting && collider.CompareTag("NorthPolarity")) || (isRepelling && collider.CompareTag("SouthPolarity")))
+                if ((currentState == playerState.NorthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.SouthMode && collider.CompareTag("SouthPolarity"))) // handles push 
                 {
                     Debug.Log("North Mode");
 
@@ -79,7 +93,8 @@ public class PlayerMagnetism : MonoBehaviour
                         }
                     }
                 }
-                else if ((isAttracting && collider.CompareTag("SouthPolarity")) || (isRepelling && collider.CompareTag("NorthPolarity")))
+                
+                else if ((currentState == playerState.SouthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.NorthMode && collider.CompareTag("SouthPolarity"))) // handles pull
                 {
                     Debug.Log("South Mode");
 
@@ -107,9 +122,10 @@ public class PlayerMagnetism : MonoBehaviour
                         }
                     }
                 }
+
             }
         }
-        else
+        else // in neutral draw distance circle?
         {
             if (currentLineRenderer != null)
             {
