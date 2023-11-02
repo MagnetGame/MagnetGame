@@ -81,7 +81,7 @@ public class PlayerMagnetism : MonoBehaviour
                             objectRigidbody.AddForce(breakForce, ForceMode2D.Impulse);
                         }
                     }
-                    else //out side max attraction distance then we try to apply force
+                    else 
                     {
                         Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force to player 
                         playerRigidbody.AddForce(force, ForceMode2D.Impulse);
