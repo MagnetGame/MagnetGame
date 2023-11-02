@@ -43,12 +43,6 @@ public class PlayerMovement : MonoBehaviour
         //isOnInteractable = Physics.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer); //todo change this to circle 
         isOnInteractable = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer);
 
-        if (isOnInteractable)
-        {
-            //Debug.Log("found interactable");
-        }
-
-
         if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) //TODO here we can jump while magnetized
         {
             //Debug.Log("Got Space and not grounded");
