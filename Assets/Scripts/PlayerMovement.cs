@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, groundLayer);
-        //isOnInteractable = Physics.Raycast(feetPosition.position, Vector3.down, groundCheckCircleRadius, interactableObjectsLayer); //todo change this to circle 
+        //isOnInteractable = Physics.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer); //todo change this to circle 
         isOnInteractable = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer);
 
         if (isOnInteractable)

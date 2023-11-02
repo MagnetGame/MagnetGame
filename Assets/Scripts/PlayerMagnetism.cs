@@ -9,8 +9,6 @@ public class PlayerMagnetism : MonoBehaviour
     public float breakingForce = .1f; // Force applied to break attraction.
     public LineRenderer lineRendererPrefab;
     private LineRenderer currentLineRenderer;
-    private bool isAttracting = false;
-    private bool isRepelling = false;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
