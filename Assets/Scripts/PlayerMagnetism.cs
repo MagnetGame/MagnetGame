@@ -43,7 +43,7 @@ public class PlayerMagnetism : MonoBehaviour
             currentState = playerState.Neutral;
         }
 
-        //TODO change sprites here
+        //TODO change sprites/animation here
         switch (currentState)
         {
             case playerState.NorthMode:
@@ -57,11 +57,16 @@ public class PlayerMagnetism : MonoBehaviour
                 break;
         }
 
+
+        
         if (currentState == playerState.NorthMode || currentState == playerState.SouthMode)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
             foreach (Collider2D collider in colliders)
             {
+                //TODO wall walking, hmm
+
+                //regular polarity
                 if ((currentState == playerState.NorthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.SouthMode && collider.CompareTag("SouthPolarity"))) // handles push 
                 {
                     

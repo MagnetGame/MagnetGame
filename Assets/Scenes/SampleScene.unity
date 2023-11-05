@@ -348,9 +348,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnetRadius: 1
-  magnetForce: 0.5
+  magnetForce: 1
   maxAttractionDistance: 1
-  breakingForce: 7
+  breakingForce: 16
   lineRendererPrefab: {fileID: 1650735830}
   spriteRenderer: {fileID: 589314811}
 --- !u!1 &335590979
@@ -697,7 +697,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.78, z: -10}
+  m_LocalPosition: {x: 0, y: -1.89, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -811,9 +811,9 @@ GameObject:
   - component: {fileID: 597190127}
   - component: {fileID: 597190126}
   - component: {fileID: 597190125}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: NorthPolarity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1654,9 +1654,9 @@ GameObject:
   - component: {fileID: 2030455580}
   - component: {fileID: 2030455579}
   - component: {fileID: 2030455578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: NorthPolarity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
