@@ -9,6 +9,8 @@ public class PlayerMagnetism : MonoBehaviour
     public float breakingForce = .1f; // Force applied to break attraction.
     public LineRenderer lineRendererPrefab;
     private LineRenderer currentLineRenderer;
+    private playerState currentState = playerState.Neutral;
+    private playerWalkState currentWalkState = playerWalkState.Ground;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
@@ -19,7 +21,15 @@ public class PlayerMagnetism : MonoBehaviour
         Neutral
     }
 
-    private playerState currentState = playerState.Neutral;
+    private enum playerWalkState
+    {
+        Ground,
+        WallRight,
+        WallLeft,
+        Ceiling
+    }
+
+    
 
     void Start()
     {
@@ -43,7 +53,7 @@ public class PlayerMagnetism : MonoBehaviour
             currentState = playerState.Neutral;
         }
 
-        //TODO change sprites/animation here
+        //TODO change player sprite for Polarity here 
         switch (currentState)
         {
             case playerState.NorthMode:
@@ -54,6 +64,19 @@ public class PlayerMagnetism : MonoBehaviour
                 break;
             case playerState.Neutral:
                 // You can set a default sprite or leave it as is.
+                break;
+        }
+
+        //Todo change/rotate sprite
+        switch (currentWalkState)
+        {
+            case playerWalkState.Ground:
+                break;
+            case playerWalkState.WallRight:
+                break;
+            case playerWalkState.WallLeft:
+                break;
+            case playerWalkState.Ceiling:
                 break;
         }
 
@@ -101,10 +124,10 @@ public class PlayerMagnetism : MonoBehaviour
                     //end of attraction code
 
                     //begin break force code
-                    Vector2 breakDirectionVector = Vector2.zero; // Initialize breakDirection to zero initially.
+                    Vector2 breakDirectionVector = Vector2.zero; 
                     if (Input.GetKeyUp("space"))
                     {
-                        // Set the breakDirection to the upward direction.
+                        // Set the breakDirection to the upward direction. //TODO change this logic by moving it above (first in else if) and use break
                         breakDirectionVector = new Vector2(0.0f, 1.0f); // Upwards direction
 
                         Debug.Log("Apply breaking force");
