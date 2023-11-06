@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -7,10 +8,15 @@ public class PlayerMagnetism : MonoBehaviour
     public float magnetForce = 2f;
     public float maxAttractionDistance = 1f; // Maximum distance for attraction.
     public float breakingForce = .1f; // Force applied to break attraction.
+    public string targetLayer = "Ground";
+    
+    public SpriteRenderer spriteRenderer; //sprite rendered for player
+    public Sprite neutral, north, south;
+
     public LineRenderer lineRendererPrefab;
     private LineRenderer currentLineRenderer;
+
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
-    public SpriteRenderer spriteRenderer; //sprite rendered for player
 
     private enum playerState
     {
@@ -30,16 +36,19 @@ public class PlayerMagnetism : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            Debug.Log("North Mode");
             currentState = playerState.NorthMode;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("South Mode");
             currentState = playerState.SouthMode;
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
+            Debug.Log("Neutral Mode");
             currentState = playerState.Neutral;
         }
 
@@ -47,13 +56,13 @@ public class PlayerMagnetism : MonoBehaviour
         switch (currentState)
         {
             case playerState.NorthMode:
-                //spriteRenderer.sprite = Resources.Load<Sprite>("NorthPlayer"); // Change to "NorthPlayer" sprite.
+                //spriteRenderer.sprite = north;  // Change to "NorthPlayer" sprite.
                 break;
             case playerState.SouthMode:
-                //spriteRenderer.sprite = Resources.Load<Sprite>("SouthPlayer"); // Change to "SouthPlayer" sprite.
+                //spriteRenderer.sprite = south; // Change to "SouthPlayer" sprite.
                 break;
             case playerState.Neutral:
-                // You can set a default sprite or leave it as is.
+                //spriteRenderer.sprite = neutral;
                 break;
         }
 
@@ -62,9 +71,20 @@ public class PlayerMagnetism : MonoBehaviour
         if (currentState == playerState.NorthMode || currentState == playerState.SouthMode)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
+            GameObject nearestObject = FindNearestObject(colliders);
             foreach (Collider2D collider in colliders)
             {
                 //TODO wall walking, hmm
+                if (nearestObject != null)
+                {
+                    WallWalking forceScript = nearestObject.GetComponent<WallWalking>();
+                    if (forceScript != null)
+                    {
+                        Vector2 direction = GetCardinalDirection(nearestObject.transform.position - transform.position);
+                        forceScript.ApplyConstantForce(direction);
+                    }
+                }
+
 
                 //regular polarity
                 if ((currentState == playerState.NorthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.SouthMode && collider.CompareTag("SouthPolarity"))) // handles push 
@@ -127,5 +147,47 @@ public class PlayerMagnetism : MonoBehaviour
                 Destroy(currentLineRenderer.gameObject);
             }
         }
+    }
+
+    private Vector2 GetCardinalDirection(Vector2 direction)
+    {
+        float angle = Vector2.SignedAngle(Vector2.up, direction.normalized);
+        if (angle > -45 && angle <= 45)
+        {
+            return Vector2.up; // North
+        }
+        else if (angle > 45 && angle <= 135)
+        {
+            return Vector2.right; // East
+        }
+        else if (angle > 135 || angle <= -135)
+        {
+            return Vector2.down; // South
+        }
+        else
+        {
+            return Vector2.left; // West
+        }
+    }
+
+    private GameObject FindNearestObject(Collider2D[] colliders)
+    {
+        GameObject nearestObject = null;
+        float nearestDistance = Mathf.Infinity;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if ((currentState == playerState.NorthMode && collider.CompareTag("SouthPolarity") && collider.gameObject.layer == LayerMask.NameToLayer("Ground")) ||
+                (currentState == playerState.SouthMode && collider.CompareTag("NorthPolarity") && collider.gameObject.layer == LayerMask.NameToLayer("Ground")))
+            {
+                float distance = Vector2.Distance(transform.position, collider.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestObject = collider.gameObject;
+                }
+            }
+        }
+        return nearestObject;
     }
 }
