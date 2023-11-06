@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float move;
     private bool isGrounded;
     private bool isOnInteractable;
+    private bool hitInteractable;
     private Rigidbody2D rb;
 
     public Transform feetPosition;
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableObjectsLayer;
     
     public SpriteRenderer spriteRenderer;
+
+    //TODO set layers?!?
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         move = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
 
         if(move < 0) //flip sprite depending on which dir we move
         {
@@ -40,14 +43,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, groundLayer);
-        //isOnInteractable = Physics.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer); //todo change this to circle 
-        isOnInteractable = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer);
+        //isOnInteractable = Physics.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer); //old ver using ciricle
 
-        if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) //TODO here we can jump while magnetized
+        hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
+        Debug.Log("On interactable by raycast?" + hitInteractable);
+
+        if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
         {
-            //Debug.Log("Got Space and not grounded");
             //rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
         }
     }
 
