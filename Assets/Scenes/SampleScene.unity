@@ -351,8 +351,12 @@ MonoBehaviour:
   magnetForce: 1
   maxAttractionDistance: 1
   breakingForce: 16
-  lineRendererPrefab: {fileID: 1650735830}
+  targetLayer: Ground
   spriteRenderer: {fileID: 589314811}
+  neutral: {fileID: 0}
+  north: {fileID: 0}
+  south: {fileID: 0}
+  lineRendererPrefab: {fileID: 1650735830}
 --- !u!1 &335590979
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,12 +580,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367059303}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.4, y: -5.34, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.11055, y: -9.970523, z: 0.17467673}
   m_LocalScale: {x: 2, y: 1.2625, z: -4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &367059308
 Rigidbody2D:
@@ -811,7 +815,7 @@ GameObject:
   - component: {fileID: 597190127}
   - component: {fileID: 597190126}
   - component: {fileID: 597190125}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Wall
   m_TagString: NorthPolarity
   m_Icon: {fileID: 0}
@@ -923,12 +927,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597190124}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.24, y: -1.7873856, z: 0.03878813}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5294504, y: -6.417908, z: 0.21346486}
   m_LocalScale: {x: 1, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &658057292
 GameObject:
@@ -941,7 +945,7 @@ GameObject:
   - component: {fileID: 658057295}
   - component: {fileID: 658057294}
   - component: {fileID: 658057296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,12 +1012,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658057292}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.45, y: -4.46, z: 0}
-  m_LocalScale: {x: 4.258, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.160549, y: -9.090525, z: 0.17467673}
+  m_LocalScale: {x: 4.2580004, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &658057296
 PolygonCollider2D:
@@ -1186,12 +1190,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798227003}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.87, y: -5.37, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.580549, y: -10.000523, z: 0.17467673}
   m_LocalScale: {x: 24.7, y: 1.2625, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &803464845 stripped
 GameObject:
@@ -1338,9 +1342,9 @@ GameObject:
   - component: {fileID: 1246198140}
   - component: {fileID: 1246198139}
   - component: {fileID: 1246198138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: NorthPolarity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1450,12 +1454,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246198137}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.5, y: -1.76, z: 0.03878813}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.210548, y: -6.390523, z: 0.21346486}
   m_LocalScale: {x: 1, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1403428349
 GameObject:
@@ -1507,6 +1511,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   polarityRange: 1
   magnetForce: 2
+--- !u!1 &1593578527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1593578528}
+  m_Layer: 0
+  m_Name: Foreground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1593578528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593578527}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.710549, y: 4.6305227, z: -0.17467673}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 798227006}
+  - {fileID: 367059307}
+  - {fileID: 597190127}
+  - {fileID: 1246198140}
+  - {fileID: 2030455580}
+  - {fileID: 658057295}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650735829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,7 +1695,7 @@ GameObject:
   - component: {fileID: 2030455580}
   - component: {fileID: 2030455579}
   - component: {fileID: 2030455578}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Wall (2)
   m_TagString: NorthPolarity
   m_Icon: {fileID: 0}
@@ -1766,12 +1807,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030455577}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.1137, y: 1.6258, z: 0.03878813}
-  m_LocalScale: {x: 0.8224, y: 168.74648, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 9.824249, y: -3.0047226, z: 0.21346486}
+  m_LocalScale: {x: 0.82240003, y: 168.74646, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &2261221602380263648
 PrefabInstance:
@@ -1934,15 +1975,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 798227006}
-  - {fileID: 367059307}
-  - {fileID: 597190127}
-  - {fileID: 1246198140}
-  - {fileID: 2030455580}
+  - {fileID: 1593578528}
   - {fileID: 239236340}
   - {fileID: 1119282290}
   - {fileID: 2261221602380263648}
   - {fileID: 2840479351979964936}
   - {fileID: 75878684}
   - {fileID: 1650735831}
-  - {fileID: 658057295}
