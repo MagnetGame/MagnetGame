@@ -351,6 +351,7 @@ MonoBehaviour:
   magnetForce: 1
   maxAttractionDistance: 1
   breakingForce: 16
+  raycastDistance: 1
   lineRendererPrefab: {fileID: 1650735830}
   spriteRenderer: {fileID: 589314811}
 --- !u!1 &335590979
@@ -1338,9 +1339,9 @@ GameObject:
   - component: {fileID: 1246198140}
   - component: {fileID: 1246198139}
   - component: {fileID: 1246198138}
-  m_Layer: 0
-  m_Name: Wall (1)
-  m_TagString: Untagged
+  m_Layer: 8
+  m_Name: Wall
+  m_TagString: NorthPolarity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1655,7 +1656,7 @@ GameObject:
   - component: {fileID: 2030455579}
   - component: {fileID: 2030455578}
   m_Layer: 8
-  m_Name: Wall (2)
+  m_Name: Ceiling
   m_TagString: NorthPolarity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

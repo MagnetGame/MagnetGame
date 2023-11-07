@@ -19,13 +19,12 @@ public class PlayerMovement : MonoBehaviour
     
     public SpriteRenderer spriteRenderer;
 
-    //TODO set layers?!?
-
+    
     // Start is called before the first frame update
     void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
 
     // Update is called once per frame
     void Update()
@@ -46,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         //isOnInteractable = Physics.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer); //old ver using ciricle
 
         hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
-        Debug.Log("On interactable by raycast?" + hitInteractable);
+        //Debug.Log("On interactable by raycast?" + hitInteractable);
 
         if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
         {
