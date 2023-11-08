@@ -21,9 +21,7 @@ public class WallWalking : MonoBehaviour
         // Calculate the angle between the direction and the force direction
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        rb.freezeRotation = false; 
         // Apply rotation to the player based on the force direction
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        rb.freezeRotation = true;
+       transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
