@@ -8,12 +8,13 @@ public class PlayerMagnetism : MonoBehaviour
     public float maxAttractionDistance = 1f; // Maximum distance for attraction.
     public float breakingForce = .1f; // Force applied to break attraction.
     public float raycastDistance = .5f;
+    public float wallDetectDistane = .2f;
 
     public LineRenderer lineRendererPrefab;
 
     private LineRenderer currentLineRenderer;
-    private playerState currentState = playerState.Neutral;
-    private playerWalkState currentWalkState = playerWalkState.Ground;
+    public playerState currentState = playerState.Neutral;
+    public playerWalkState currentWalkState = playerWalkState.Ground;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
@@ -37,7 +38,7 @@ public class PlayerMagnetism : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>(); // Assuming the player has the Rigidbody2D component on the same GameObject as this script.
     }
 
-    void Update()
+    void Update()// do not used fixed update no matter what here
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -69,11 +70,14 @@ public class PlayerMagnetism : MonoBehaviour
         }
 
         RaycastHit hitInfo;
-        int layerMask = LayerMask.GetMask("Wall", "Ceiling"); // Include the layers you want to detect
+        int layerMask = LayerMask.GetMask("Wall", "Ceiling", "Ground"); // Include the layers you want to detect
 
-        // Right raycast
+        //todo check tag for heatzone
+
+        // Right raycast //TODO change this to calculate by distance closes to which vector// ray cast left and right based on left or right movement (or key down)
         Debug.DrawRay(transform.position, Vector3.right * raycastDistance, Color.red);
-        if (Physics.Raycast(transform.position, Vector3.right, out hitInfo, raycastDistance, layerMask))
+       
+        if (Physics.Raycast(transform.position, Vector3.right, out hitInfo, raycastDistance, layerMask)) //todo change this
         {
             if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
@@ -99,7 +103,6 @@ public class PlayerMagnetism : MonoBehaviour
             case playerWalkState.Ceiling:
                 break;
         }
-
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //checking pull or push objects
