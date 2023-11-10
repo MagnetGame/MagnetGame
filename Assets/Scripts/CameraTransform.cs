@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraTransform : MonoBehaviour
 {
     public GameObject targetObject;
+    public float yOffset = 0f; // Offset to the Y Axis
     private Vector3 initialPositionRelativeToTarger;
     // Start is called before the first frame update
     private Quaternion initialRotation;
@@ -17,6 +18,7 @@ public class CameraTransform : MonoBehaviour
         }
 
         initialPositionRelativeToTarger = transform.position - targetObject.transform.position;
+        initialPositionRelativeToTarger.y += yOffset;
 
         initialRotation = transform.rotation;
         
