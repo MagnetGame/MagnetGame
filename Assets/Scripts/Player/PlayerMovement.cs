@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableObjectsLayer;
     
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
 
     public AudioClip collid;
     private AudioSource effectsAudioSource; 
@@ -42,10 +44,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        move = Input.GetAxis("Horizontal");
+        move = Input.GetAxis("Horizontal"); Brendan
+        rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        animator.SetFloat("speed", Mathf.Abs(move));
+
         rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
 
-        if(move < 0) //flip sprite depending on which dir we move
+        if (move < 0) //flip sprite depending on which dir we move
         {
             spriteRenderer.flipX = false;
         }
@@ -121,6 +126,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Exit")
+        {
+            Debug.Log("found the exit");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+ 
     public string GetCurrentWalkState()
     {
         return currentWalkState.ToString();
