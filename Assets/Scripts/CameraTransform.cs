@@ -6,38 +6,25 @@ public class CameraTransform : MonoBehaviour
 {
     public GameObject targetObject;
     public float yOffset = 0f; // Offset to the Y Axis
-    private Vector3 initialPositionRelativeToTarger;
-    // Start is called before the first frame update
-    private Quaternion initialRotation;
+    private Vector3 initialPositionRelativeToTarget;
+    private Vector3 offSet;
 
     void Start()
     {
-        if(targetObject == null){
+        if (targetObject == null)
+        {
             targetObject = this.gameObject;
-            Debug.Log("Default target target not specified");
+            Debug.Log("Default target not specified");
         }
 
-        initialPositionRelativeToTarger = transform.position - targetObject.transform.position;
-        initialPositionRelativeToTarger.y += yOffset;
-
-        initialRotation = transform.rotation;
-        
+        initialPositionRelativeToTarget = transform.position - targetObject.transform.position;
+        offSet = new Vector3(0, yOffset, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = initialPositionRelativeToTarger + targetObject.transform.position;
+        //transform.position = initialPositionRelativeToTarget + targetObject.transform.position;
         transform.LookAt(targetObject.transform);
-
-        if (Input.GetKey(KeyCode.R)) //if press r we reset table position
-        {
-            ResetTableRotation();
-        }
-    }
-
-    public void ResetTableRotation()
-    {
-        transform.rotation = initialRotation;
     }
 }
