@@ -8,6 +8,7 @@ TagManager:
   - NorthPolarity
   - SouthPolarity
   - NeutralPolarity
+  - Exit
   layers:
   - Default
   - TransparentFX
