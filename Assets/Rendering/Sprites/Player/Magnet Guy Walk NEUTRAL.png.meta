@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e5b7cf7784cace24390147814d590f37
+guid: 1eb938b0e01c9cc488f836db3dd0861c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,6 +81,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,30 +119,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: InteractibleObjects_0
+      name: neutral_walk_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 32
-        height: 32
+        x: 0
+        y: 40
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704c7a4fd6373fa4c899fb5ab89ca2a5
-      internalID: 1786081153
+      spriteID: 55ad96026483bb14cb9f6b3ac05edd87
+      internalID: 861980967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_1
+      name: neutral_walk_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 2
-        width: 32
-        height: 32
+        x: 40
+        y: 40
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04b993cdaea105a4fa1e4dfbbb971b36
-      internalID: -1533811822
+      spriteID: 27396df5b699c28479d1cf2e8c59338f
+      internalID: 94496314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_2
+      name: neutral_walk_2
       rect:
         serializedVersion: 2
-        x: 74
-        y: 6
-        width: 24
-        height: 24
+        x: 80
+        y: 40
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ad43e3d551bca44387caa532f1a01dc
-      internalID: 871824128
+      spriteID: 35c35c371ebe69548a8097af34854e57
+      internalID: 1720352061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_3
+      name: neutral_walk_3
       rect:
         serializedVersion: 2
-        x: 108
-        y: 6
-        width: 24
-        height: 24
+        x: 0
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18cbc71561500d84a91204070c762ef5
-      internalID: -637681215
+      spriteID: 3cac4cc4a34f7fe4eaff9d2cd69cff94
+      internalID: -1018290106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_4
+      name: neutral_walk_4
       rect:
         serializedVersion: 2
-        x: 138
-        y: 2
-        width: 32
-        height: 32
+        x: 40
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c63edd3452749964cb707ebe6f668baa
-      internalID: -658608109
+      spriteID: 5892daaecb56c264dbee866e02c223f8
+      internalID: -1219684940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_5
+      name: neutral_walk_5
       rect:
         serializedVersion: 2
-        x: 176
-        y: 6
-        width: 24
-        height: 24
+        x: 80
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efe3246d21ae53a46bd5fa123030e809
-      internalID: 1005269161
+      spriteID: f22d8790c9026b8489cbb638581382dc
+      internalID: -358318486
       vertices: []
       indices: 
       edges: []
@@ -259,12 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      InteractibleObjects_0: 1786081153
-      InteractibleObjects_1: -1533811822
-      InteractibleObjects_2: 871824128
-      InteractibleObjects_3: -637681215
-      InteractibleObjects_4: -658608109
-      InteractibleObjects_5: 1005269161
+      neutral_walk_0: 861980967
+      neutral_walk_1: 94496314
+      neutral_walk_2: 1720352061
+      neutral_walk_3: -1018290106
+      neutral_walk_4: -1219684940
+      neutral_walk_5: -358318486
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
