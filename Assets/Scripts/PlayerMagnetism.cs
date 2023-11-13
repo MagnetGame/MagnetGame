@@ -13,8 +13,8 @@ public class PlayerMagnetism : MonoBehaviour
     public LineRenderer lineRendererPrefab;
 
     private LineRenderer currentLineRenderer;
-    public playerState currentState = playerState.Neutral;
-    public playerWalkState currentWalkState = playerWalkState.Ground;
+    private playerState currentState = playerState.Neutral;
+    private playerWalkState currentWalkState = playerWalkState.Ground;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
