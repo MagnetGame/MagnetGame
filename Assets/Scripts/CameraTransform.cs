@@ -5,26 +5,37 @@ using UnityEngine;
 public class CameraTransform : MonoBehaviour
 {
     public GameObject targetObject;
-    public float yOffset = 0f; // Offset to the Y Axis
-    private Vector3 initialPositionRelativeToTarget;
-    private Vector3 offSet;
+    private Vector3 initialPositionRelativeToTarger;
+    // Start is called before the first frame update
+    private Quaternion initialRotation;
 
     void Start()
     {
-        if (targetObject == null)
-        {
+        if(targetObject == null){
             targetObject = this.gameObject;
-            Debug.Log("Default target not specified");
+            Debug.Log("Default target target not specified");
         }
 
-        initialPositionRelativeToTarget = transform.position - targetObject.transform.position;
-        offSet = new Vector3(0, yOffset, 0);
+        initialPositionRelativeToTarger = transform.position - targetObject.transform.position;
+
+        initialRotation = transform.rotation;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //transform.position = initialPositionRelativeToTarget + targetObject.transform.position;
+        transform.position = initialPositionRelativeToTarger + targetObject.transform.position;
         transform.LookAt(targetObject.transform);
+
+        if (Input.GetKey(KeyCode.R)) //if press r we reset table position
+        {
+            ResetTableRotation();
+        }
+    }
+
+    public void ResetTableRotation()
+    {
+        transform.rotation = initialRotation;
     }
 }
