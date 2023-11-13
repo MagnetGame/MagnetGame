@@ -9,28 +9,16 @@ public class PlayerMagnetism : MonoBehaviour
     public float breakingForce = .1f; // Force applied to break attraction.
     public float raycastDistance = .5f;
     public float wallDetectDistane = .2f;
-
-    public LineRenderer lineRendererPrefab;
-
-    private LineRenderer currentLineRenderer;
-    public playerState currentState = playerState.Neutral;
-    public playerWalkState currentWalkState = playerWalkState.Ground;
-    private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
+    private playerState currentState = playerState.Neutral;
+    private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
+    
     private enum playerState
     {
         NorthMode,
         SouthMode,
         Neutral
-    }
-
-    private enum playerWalkState
-    {
-        Ground,
-        WallOnRight,
-        WallOnLeft,
-        Ceiling
     }
 
     void Start()
@@ -69,40 +57,6 @@ public class PlayerMagnetism : MonoBehaviour
                 break;
         }
 
-        RaycastHit hitInfo;
-        int layerMask = LayerMask.GetMask("Wall", "Ceiling", "Ground"); // Include the layers you want to detect
-
-        //todo check tag for heatzone
-
-        // Right raycast //TODO change this to calculate by distance closes to which vector// ray cast left and right based on left or right movement (or key down)
-        Debug.DrawRay(transform.position, Vector3.right * raycastDistance, Color.red);
-       
-        if (Physics.Raycast(transform.position, Vector3.right, out hitInfo, raycastDistance, layerMask)) //todo change this
-        {
-            if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
-            {
-                currentWalkState = playerWalkState.WallOnRight;
-            }
-            else if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ceiling"))
-            {
-                currentWalkState = playerWalkState.Ceiling;
-            }
-        }
-
-        Debug.Log("Current Player Walk State: " + currentWalkState);
-
-        //Todo change/rotate sprite
-        switch (currentWalkState)
-        {
-            case playerWalkState.Ground:
-                break;
-            case playerWalkState.WallOnRight:
-                break;
-            case playerWalkState.WallOnLeft:
-                break;
-            case playerWalkState.Ceiling:
-                break;
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //checking pull or push objects
@@ -118,6 +72,7 @@ public class PlayerMagnetism : MonoBehaviour
                 {
                     Vector2 direction = transform.position - collider.transform.position;
                     float distance = direction.magnitude;
+
                     Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force to player 
                     playerRigidbody.AddForce(force, ForceMode2D.Impulse);
 
@@ -162,12 +117,6 @@ public class PlayerMagnetism : MonoBehaviour
 
             }
         }
-        else // in neutral draw distance circle?
-        {
-            if (currentLineRenderer != null)
-            {
-                Destroy(currentLineRenderer.gameObject);
-            }
-        }
+        
     }
 }
