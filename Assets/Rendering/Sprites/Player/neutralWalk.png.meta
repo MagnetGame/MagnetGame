@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e5b7cf7784cace24390147814d590f37
+guid: da6f6a25755f1724e92124520a751a6d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -73,6 +73,19 @@ TextureImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,30 +119,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: InteractibleObjects_0
+      name: neutralWalk_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 32
-        height: 32
+        x: 0
+        y: 40
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704c7a4fd6373fa4c899fb5ab89ca2a5
-      internalID: 1786081153
+      spriteID: 17f2d7878b306f04b89375d9911e956f
+      internalID: -1334558117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_1
+      name: neutralWalk_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 2
-        width: 32
-        height: 32
+        x: 40
+        y: 40
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04b993cdaea105a4fa1e4dfbbb971b36
-      internalID: -1533811822
+      spriteID: ef9f18810f99daa419ae95a487f2a626
+      internalID: 905385915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_2
+      name: neutralWalk_2
       rect:
         serializedVersion: 2
-        x: 74
-        y: 6
-        width: 24
-        height: 24
+        x: 80
+        y: 40
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ad43e3d551bca44387caa532f1a01dc
-      internalID: 871824128
+      spriteID: 755be24cc1099be469d30d94ad4367dc
+      internalID: 1838103203
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_3
+      name: neutralWalk_3
       rect:
         serializedVersion: 2
-        x: 108
-        y: 6
-        width: 24
-        height: 24
+        x: 0
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18cbc71561500d84a91204070c762ef5
-      internalID: -637681215
+      spriteID: e2aaf4bafb6cca24dbec1c96ac7cd6e5
+      internalID: -1164065278
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_4
+      name: neutralWalk_4
       rect:
         serializedVersion: 2
-        x: 138
-        y: 2
-        width: 32
-        height: 32
+        x: 40
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c63edd3452749964cb707ebe6f668baa
-      internalID: -658608109
+      spriteID: 6dd82cfe628fa4b42aadd745e3de3323
+      internalID: 416713420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: InteractibleObjects_5
+      name: neutralWalk_5
       rect:
         serializedVersion: 2
-        x: 176
-        y: 6
-        width: 24
-        height: 24
+        x: 80
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efe3246d21ae53a46bd5fa123030e809
-      internalID: 1005269161
+      spriteID: 4bbc233007604624f88119add3cb5390
+      internalID: 1409044722
       vertices: []
       indices: 
       edges: []
@@ -259,12 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      InteractibleObjects_0: 1786081153
-      InteractibleObjects_1: -1533811822
-      InteractibleObjects_2: 871824128
-      InteractibleObjects_3: -637681215
-      InteractibleObjects_4: -658608109
-      InteractibleObjects_5: 1005269161
+      neutralWalk_0: -1334558117
+      neutralWalk_1: 905385915
+      neutralWalk_2: 1838103203
+      neutralWalk_3: -1164065278
+      neutralWalk_4: 416713420
+      neutralWalk_5: 1409044722
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
