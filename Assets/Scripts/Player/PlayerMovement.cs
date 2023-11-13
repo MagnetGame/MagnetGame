@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableObjectsLayer;
     
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +31,9 @@ public class PlayerMovement : MonoBehaviour
     {
         move = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        animator.SetFloat("speed", Mathf.Abs(move));
 
-        if(move < 0) //flip sprite depending on which dir we move
+        if (move < 0) //flip sprite depending on which dir we move
         {
             spriteRenderer.flipX = false;
         }
@@ -57,24 +60,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        
-        if (collision.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Exit")
         {
-            Debug.Log("Grounded");
-            isGrounded = true;
-        } 
-    } 
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            Debug.Log("Not grounded");
-            isGrounded = false;
+            Debug.Log("found the exit");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
-    */
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Exit")
+        {
+            Debug.Log("stayed in exit zone");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
 }

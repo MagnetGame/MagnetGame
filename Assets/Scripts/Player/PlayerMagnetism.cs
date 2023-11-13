@@ -12,11 +12,17 @@ public class PlayerMagnetism : MonoBehaviour
     
     public SpriteRenderer spriteRenderer; //sprite rendered for player
     public Sprite neutral, north, south;
+    public Animator animator;
+    public ParticleSystem northParticles;
+    public ParticleSystem southParticles;
+
 
     public LineRenderer lineRendererPrefab;
     private LineRenderer currentLineRenderer;
 
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
+    
+
 
     private enum playerState
     {
@@ -26,10 +32,12 @@ public class PlayerMagnetism : MonoBehaviour
     }
 
     private playerState currentState = playerState.Neutral;
+    private playerState previousState = playerState.Neutral;
 
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>(); // Assuming the player has the Rigidbody2D component on the same GameObject as this script.
+        animator.SetBool("isNeutral", true);
     }
 
     void Update()
@@ -38,19 +46,34 @@ public class PlayerMagnetism : MonoBehaviour
         {
             Debug.Log("North Mode");
             currentState = playerState.NorthMode;
+            if(previousState != currentState)
+            {
+                northParticles.Play();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("South Mode");
             currentState = playerState.SouthMode;
+            if (previousState != currentState)
+            {
+                southParticles.Play();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Neutral Mode");
             currentState = playerState.Neutral;
+            if (previousState != currentState)
+            {
+                northParticles.Play();
+                southParticles.Play();
+            }
         }
+        UpdateStateAnimation(currentState);
+        previousState = currentState;
 
         //TODO change sprites/animation here
         switch (currentState)
@@ -189,5 +212,27 @@ public class PlayerMagnetism : MonoBehaviour
             }
         }
         return nearestObject;
+    }
+
+    private void UpdateStateAnimation(playerState mode)
+    {
+        switch (mode)
+        {
+            case playerState.NorthMode:
+                animator.SetBool("isNorth", true);
+                animator.SetBool("isNeutral", false);
+                animator.SetBool("isSouth", false);
+                break;
+            case playerState.Neutral:
+                animator.SetBool("isNorth", false);
+                animator.SetBool("isNeutral", true);
+                animator.SetBool("isSouth", false);
+                break;
+            case playerState.SouthMode:
+                animator.SetBool("isNorth", false);
+                animator.SetBool("isNeutral", false);
+                animator.SetBool("isSouth", true);
+                break;
+        }
     }
 }
