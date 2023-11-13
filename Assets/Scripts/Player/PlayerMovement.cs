@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     
     public SpriteRenderer spriteRenderer;
 
+    public AudioClip collid;
+    private AudioSource effectsAudioSource; 
+
     private enum playerWalkState
     {
         Ground,
@@ -100,6 +103,15 @@ public class PlayerMovement : MonoBehaviour
         {
             //rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
             rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isGrounded == false)
+        {
+            isGrounded = true;
+            effectsAudioSource.PlayOneShot(collid);
         }
     }
 
