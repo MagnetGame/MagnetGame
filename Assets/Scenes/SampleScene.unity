@@ -1349,6 +1349,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2225928358519913795, guid: 5b99b9f8b7b1847418d2022ac6ec2d8f, type: 3}
+      propertyPath: raycastRange
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2353431835764357243, guid: 5b99b9f8b7b1847418d2022ac6ec2d8f, type: 3}
+      propertyPath: magnetForce
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2353431835764357243, guid: 5b99b9f8b7b1847418d2022ac6ec2d8f, type: 3}
       propertyPath: lineRendererPrefab
       value: 
@@ -1421,6 +1429,10 @@ PrefabInstance:
     - target: {fileID: 4940537653903227326, guid: 623e8976c5051b54eb5a92adf1eff3a8, type: 3}
       propertyPath: m_Name
       value: Ceiling
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940537653903227326, guid: 623e8976c5051b54eb5a92adf1eff3a8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
