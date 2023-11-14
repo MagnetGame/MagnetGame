@@ -19,13 +19,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableObjectsLayer;
     
     public SpriteRenderer spriteRenderer;
-    public Animator animator;
+    //public Animator animator;
 
     public AudioClip collid;
     private AudioSource effectsAudioSource;
-
-    public AudioClip collid;
-    private AudioSource effectsAudioSource; 
 
     private enum playerWalkState
     {
@@ -48,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         move = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
-        animator.SetFloat("speed", Mathf.Abs(move)); 
+        //animator.SetFloat("speed", Mathf.Abs(move)); 
 
         if(move < 0) //flip sprite depending on which dir we move
         {
