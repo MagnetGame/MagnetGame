@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip collid;
     private AudioSource effectsAudioSource;
 
+    public AudioClip collid;
+    private AudioSource effectsAudioSource; 
+
     private enum playerWalkState
     {
         Ground,
