@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableObjectsLayer;
     
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
+
+    public AudioClip collid;
+    private AudioSource effectsAudioSource;
 
     private enum playerWalkState
     {
@@ -39,15 +43,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream
         move = Input.GetAxis("Horizontal");
-=======
-        move = Input.GetAxis("Horizontal"); //Brendan
-        rb.velocity = new Vector2(move * speed, rb.velocity.y);
-        animator.SetFloat("speed", Mathf.Abs(move));
-
->>>>>>> Stashed changes
         rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
+        animator.SetFloat("speed", Mathf.Abs(move)); 
 
         if(move < 0) //flip sprite depending on which dir we move
         {
@@ -107,6 +105,15 @@ public class PlayerMovement : MonoBehaviour
         {
             //rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
             rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isGrounded == false)
+        {
+            isGrounded = true;
+            effectsAudioSource.PlayOneShot(collid);
         }
     }
 

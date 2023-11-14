@@ -338,6 +338,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   spriteRenderer: {fileID: 589314811}
+  animator: {fileID: 0}
   collid: {fileID: 8300000, guid: 3fce60676489e094c9485da53de18dc2, type: 3}
 --- !u!114 &239236342
 MonoBehaviour:
@@ -703,7 +704,7 @@ SpriteRenderer:
   m_Size: {x: 2.86, y: 0.71}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &476843839
@@ -980,12 +981,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1334558117, guid: da6f6a25755f1724e92124520a751a6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20ec15066d7dda9498e9d0849a13cc62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.4, y: 0.4}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
