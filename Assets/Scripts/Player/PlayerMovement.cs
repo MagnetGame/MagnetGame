@@ -39,7 +39,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
         move = Input.GetAxis("Horizontal");
+=======
+        move = Input.GetAxis("Horizontal"); //Brendan
+        rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        animator.SetFloat("speed", Mathf.Abs(move));
+
+>>>>>>> Stashed changes
         rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
 
         if(move < 0) //flip sprite depending on which dir we move
