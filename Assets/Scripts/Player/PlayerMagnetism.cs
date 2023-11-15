@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -158,13 +160,13 @@ public class PlayerMagnetism : MonoBehaviour
     private void SetLineRendererProperties(LineRenderer lineRenderer, string polarityTag)
     {
         // Set width to 1/3rd of its normal size
-        lineRenderer.startWidth = 0.33f;
-        lineRenderer.endWidth = 0.33f;
+        lineRenderer.startWidth = 0.20f;
+        lineRenderer.endWidth = 0.20f;
 
         lineRenderer.material = lineMaterial;
 
         // Set color based on polarity
-        Color startColor = polarityTag == "NorthPolarity" ? Color.red : Color.blue;
+        Color startColor = polarityTag == "NorthPolarity" ? new Color(1, 0, 0, 0.5f) : new Color(0, 0, 1, 0.5f);
         Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // Gradient to 0 alpha
 
         lineRenderer.startColor = startColor;
