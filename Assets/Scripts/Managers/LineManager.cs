@@ -18,6 +18,17 @@ public class LineManager : MonoBehaviour
         this.points = points;
     }
 
+    public Transform[] GetPoints()
+    {
+        return points;
+    }
+
+    public void ClearLines()
+    {
+        lr.positionCount = 0;
+        points = null;
+    }
+
     private void Update()
     {
         for (int i = 0; i < points.Length; i++)
