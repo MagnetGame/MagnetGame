@@ -338,8 +338,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   spriteRenderer: {fileID: 589314811}
-  animator: {fileID: 0}
-  collid: {fileID: 8300000, guid: 3fce60676489e094c9485da53de18dc2, type: 3}
+  floorCollidClip: {fileID: 8300000, guid: 3fce60676489e094c9485da53de18dc2, type: 3}
+  interactableCollidClip: {fileID: 8300000, guid: bdd3660f21a4c4e48ab214d3ab22deee, type: 3}
 --- !u!114 &239236342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +359,7 @@ MonoBehaviour:
   raycastDistance: 0.5
   wallDetectDistane: 0.2
   spriteRenderer: {fileID: 589314811}
+  magnetismClip: {fileID: 8300000, guid: d5cce934fac14944d831fef469d00f03, type: 3}
 --- !u!1 &335590979
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +705,7 @@ SpriteRenderer:
   m_Size: {x: 2.86, y: 0.71}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &476843839
@@ -733,7 +734,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   - component: {fileID: 519420035}
   - component: {fileID: 519420034}
   m_Layer: 0
@@ -817,20 +817,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 239236340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d0fbe7f74b1ffe45ba5bad3022fb56b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetObject: {fileID: 239236337}
-  yOffset: 0
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,7 +967,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 20ec15066d7dda9498e9d0849a13cc62, type: 3}
+  m_Sprite: {fileID: -1334558117, guid: da6f6a25755f1724e92124520a751a6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
