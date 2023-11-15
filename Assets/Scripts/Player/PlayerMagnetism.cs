@@ -13,7 +13,9 @@ public class PlayerMagnetism : MonoBehaviour
 
     private playerState currentState = playerState.Neutral;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
-    
+
+    [SerializeField] private AudioClip magnetismClip;
+
     private enum playerState
     {
         NorthMode,
@@ -31,11 +33,13 @@ public class PlayerMagnetism : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             currentState = playerState.NorthMode;
+            SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentState = playerState.SouthMode;
+            SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.W))

@@ -8,8 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     private float move;
     private bool isGrounded;
-    private bool isOnInteractable;
     private bool hitInteractable;
+    private bool wasGrounded = false;
+    private bool wasOnInteractable = false;
     private Rigidbody2D rb;
 
     public Transform feetPosition;
@@ -21,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     //public Animator animator;
 
-    public AudioClip collid;
-    private AudioSource effectsAudioSource;
+    [SerializeField] private AudioClip floorCollidClip;
+    [SerializeField] private AudioClip interactableCollidClip;
 
     private enum playerWalkState
     {
@@ -94,32 +95,40 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector2.down * speed; // Move down
             }
         }
-        Debug.Log("player walk state is: " + currentWalkState);
+        //Debug.Log("player walk state is: " + currentWalkState);
 
         isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, groundLayer);
-        //isOnInteractable = Physics.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer); //old ver using ciricle
         hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
         //Debug.Log("On interactable by raycast?" + hitInteractable);
 
-        if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
+        if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) 
         {
             //rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
             rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground" && isGrounded == false)
-        {
-            isGrounded = true;
-            effectsAudioSource.PlayOneShot(collid);
-        }
-    }
-
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        bool isCurrentlyGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, groundLayer);
+        bool isCurrentlyOnInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
+
+
+        if (isCurrentlyGrounded && !wasGrounded)
+        {
+            // Play the sound effect only when transitioning from not grounded to grounded
+            SoundFXManager.Instance.PlaySoundFXClip(floorCollidClip, transform, 0.6f);
+        }
+
+        if (isCurrentlyOnInteractable && !wasOnInteractable)
+        {
+            // Play the sound effect only when transitioning from not on interactable to on interactable
+            SoundFXManager.Instance.PlaySoundFXClip(interactableCollidClip, transform, 0.6f);
+        }
+
+        wasGrounded = isCurrentlyGrounded;
+        wasOnInteractable = isCurrentlyOnInteractable;
     }
 
 
