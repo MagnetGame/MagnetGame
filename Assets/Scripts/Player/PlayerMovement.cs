@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        move = Input.GetAxis("Horizontal"); Brendan
+        move = Input.GetAxis("Horizontal"); 
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
         animator.SetFloat("speed", Mathf.Abs(move));
 

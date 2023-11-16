@@ -31,8 +31,6 @@ public class PlayerMagnetism : MonoBehaviour
         Neutral
     }
 
-
-    private playerState currentState = playerState.Neutral;
     private playerState previousState = playerState.Neutral;
 
     void Start()
