@@ -143,6 +143,7 @@ public class PlayerMagnetism : MonoBehaviour
         {
             GameObject lineObject = new GameObject("Line");
             LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
+            lineRenderer.position
             lineManager = lineObject.AddComponent<LineManager>();
             lineManager.SetUpLine(new Transform[] { transform, target });
 
