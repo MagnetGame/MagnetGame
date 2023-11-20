@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -19,10 +22,12 @@ public class PlayerMagnetism : MonoBehaviour
     public LineRenderer lineRendererPrefab;
     private LineRenderer currentLineRenderer;
 
-
     private playerState currentState = playerState.Neutral;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
-    
+
+    [SerializeField] private AudioClip magnetismClip;
+    public Material lineMaterial;
+    public float lineLifeTime = 0.5f;
 
     private enum playerState
     {
@@ -48,6 +53,7 @@ public class PlayerMagnetism : MonoBehaviour
             {
                 northParticles.Play();
             }
+            SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -57,6 +63,7 @@ public class PlayerMagnetism : MonoBehaviour
             {
                 southParticles.Play();
             }
+            SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -91,6 +98,7 @@ public class PlayerMagnetism : MonoBehaviour
         if (currentState == playerState.NorthMode || currentState == playerState.SouthMode)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
+
             foreach (Collider2D collider in colliders)
             {
                 //TODO wall walking, hmm
@@ -143,6 +151,10 @@ public class PlayerMagnetism : MonoBehaviour
 
                 }
 
+                if (collider.CompareTag("NorthPolarity") || collider.CompareTag("SouthPolarity"))
+                {
+                    UpdateLine(collider.transform);
+                }
             }
         }
         
@@ -169,4 +181,44 @@ public class PlayerMagnetism : MonoBehaviour
                 break;
         }
     }
+
+    // Instantiate or update the LineRenderer.
+    private void UpdateLine(Transform target)
+    {
+        LineManager lineManager = target.GetComponent<LineManager>();
+
+        if (lineManager == null)
+        {
+            GameObject lineObject = new GameObject("Line");
+            LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
+            lineManager = lineObject.AddComponent<LineManager>();
+            lineManager.SetUpLine(new Transform[] { transform, target });
+
+            // Set LineRenderer properties
+            SetLineRendererProperties(lineRenderer, target.tag);
+            Destroy(lineManager.gameObject, lineLifeTime);
+        }
+        else
+        {
+            lineManager.SetUpLine(new Transform[] { transform, target });
+            Destroy(lineManager.gameObject, lineLifeTime);
+        }
+    }
+
+    private void SetLineRendererProperties(LineRenderer lineRenderer, string polarityTag)
+    {
+        // Set width to 1/3rd of its normal size
+        lineRenderer.startWidth = 0.20f;
+        lineRenderer.endWidth = 0.20f;
+
+        lineRenderer.material = lineMaterial;
+
+        // Set color based on polarity
+        Color startColor = polarityTag == "NorthPolarity" ? new Color(1, 0, 0, 0.5f) : new Color(0, 0, 1, 0.5f);
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // Gradient to 0 alpha
+
+        lineRenderer.startColor = startColor;
+        lineRenderer.endColor = endColor;
+    }
 }
+
