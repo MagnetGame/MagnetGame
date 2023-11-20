@@ -14,6 +14,14 @@ public class PlayerMagnetism : MonoBehaviour
     public float wallDetectDistane = .2f;
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
+    public Sprite neutral, north, south;
+    public Animator animator;
+    public ParticleSystem northParticles;
+    public ParticleSystem southParticles;
+
+    public LineRenderer lineRendererPrefab;
+    private LineRenderer currentLineRenderer;
+
     private playerState currentState = playerState.Neutral;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
 
@@ -28,9 +36,12 @@ public class PlayerMagnetism : MonoBehaviour
         Neutral
     }
 
+    private playerState previousState = playerState.Neutral;
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>(); // Assuming the player has the Rigidbody2D component on the same GameObject as this script.
+        animator.SetBool("isNeutral", true);
     }
 
     void Update()// do not used fixed update no matter what here
@@ -38,19 +49,34 @@ public class PlayerMagnetism : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             currentState = playerState.NorthMode;
+            if(previousState != currentState)
+            {
+                northParticles.Play();
+            }
             SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentState = playerState.SouthMode;
+            if (previousState != currentState)
+            {
+                southParticles.Play();
+            }
             SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             currentState = playerState.Neutral;
+            if (previousState != currentState)
+            {
+                northParticles.Play();
+                southParticles.Play();
+            }
         }
+        UpdateStateAnimation(currentState);
+        previousState = currentState;
 
         //TODO change player sprite for Polarity here 
         switch (currentState)
@@ -132,6 +158,28 @@ public class PlayerMagnetism : MonoBehaviour
             }
         }
         
+    }
+
+    private void UpdateStateAnimation(playerState mode)
+    {
+        switch (mode)
+        {
+            case playerState.NorthMode:
+                animator.SetBool("isNorth", true);
+                animator.SetBool("isNeutral", false);
+                animator.SetBool("isSouth", false);
+                break;
+            case playerState.Neutral:
+                animator.SetBool("isNorth", false);
+                animator.SetBool("isNeutral", true);
+                animator.SetBool("isSouth", false);
+                break;
+            case playerState.SouthMode:
+                animator.SetBool("isNorth", false);
+                animator.SetBool("isNeutral", false);
+                animator.SetBool("isSouth", true);
+                break;
+        }
     }
 
     // Instantiate or update the LineRenderer.

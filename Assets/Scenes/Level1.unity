@@ -2547,10 +2547,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4872790859940557261, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
-      propertyPath: collid
-      value: 
-      objectReference: {fileID: 8300000, guid: 3fce60676489e094c9485da53de18dc2, type: 3}
     - target: {fileID: 4975240164715580866, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.5
@@ -2591,14 +2587,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
-      propertyPath: lineMaterial
-      value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
-      propertyPath: magnetismClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d5cce934fac14944d831fef469d00f03, type: 3}
     - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: lineRendererPrefab
       value: 
