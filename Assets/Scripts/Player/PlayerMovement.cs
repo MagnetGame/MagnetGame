@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
 
     public AudioClip collid;
+    public AudioClip interactiableCollid;
     private AudioSource effectsAudioSource; 
 
     private enum playerWalkState
@@ -100,13 +101,10 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("player walk state is: " + currentWalkState);
 
         isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, groundLayer);
-        //isOnInteractable = Physics.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer); //old ver using ciricle
         hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
-        //Debug.Log("On interactable by raycast?" + hitInteractable);
 
-        if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
+        if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) 
         {
-            //rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
             rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
         }
     }
@@ -117,6 +115,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
             effectsAudioSource.PlayOneShot(collid);
+        }
+        if (collision.gameObject.tag == "NorthPolarity" || collision.gameObject.tag == "NorthPolarity" || collision.gameObject.tag == "NeutralPolarity" && isGrounded == false)
+        {
+            effectsAudioSource.PlayOneShot(interactiableCollid);
         }
     }
 

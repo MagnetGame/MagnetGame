@@ -6424,6 +6424,10 @@ PrefabInstance:
       propertyPath: collid
       value: 
       objectReference: {fileID: 8300000, guid: 3fce60676489e094c9485da53de18dc2, type: 3}
+    - target: {fileID: 4872790859940557261, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
+      propertyPath: interactiableCollid
+      value: 
+      objectReference: {fileID: 8300000, guid: bdd3660f21a4c4e48ab214d3ab22deee, type: 3}
     - target: {fileID: 4975240164715580866, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.15
