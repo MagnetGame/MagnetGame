@@ -255,10 +255,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5463097049366635227, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 803464846}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
 --- !u!1 &335590979
 GameObject:
@@ -660,7 +657,7 @@ GameObject:
   - component: {fileID: 658057296}
   m_Layer: 6
   m_Name: Triangle
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -798,7 +795,7 @@ GameObject:
   - component: {fileID: 798227004}
   m_Layer: 6
   m_Name: Ground
-  m_TagString: NeutralPolarity
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -915,25 +912,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &803464845 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5463097049366635227, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
-  m_PrefabInstance: {fileID: 75878684}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &803464846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803464845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe6667af1e7c4474c83ba74a7f65703c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  polarityRange: 2
-  magnetForce: 2
 --- !u!1 &849157767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,25 +1390,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1593578528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1583836928 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5463097049366635227, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
-  m_PrefabInstance: {fileID: 2840479351979964936}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1583836929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583836928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe6667af1e7c4474c83ba74a7f65703c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  polarityRange: 1
-  magnetForce: 2
 --- !u!1 &1593578527
 GameObject:
   m_ObjectHideFlags: 0
@@ -6349,6 +6308,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5100915706720536576, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: lineRendererPrefab
       value: 
@@ -6639,10 +6602,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5463097049366635227, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1583836929}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
 --- !u!1001 &8117045256784569957
 PrefabInstance:
