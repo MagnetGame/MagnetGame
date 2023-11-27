@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class MenuNavigation : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
-    void Start()
+    public void Start()
     {
         resume();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -27,17 +27,33 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void pause()
+    public void pause()
     {
         GameIsPaused = true;
         PauseMenuUI.SetActive(GameIsPaused);
         Time.timeScale = 0f;
     }
 
-    void resume()
+    public void resume()
     {
         GameIsPaused = false;
         PauseMenuUI.SetActive(GameIsPaused);
         Time.timeScale = 1f;
+    }
+    public void StartGame()
+    {
+        Debug.Log("button pressed");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void GoToMainMenu()
+    {
+        Debug.Log("button pressed");
+        SceneManager.LoadScene(0);
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
