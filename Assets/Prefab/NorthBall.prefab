@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5114147679846918791}
   - component: {fileID: 1608294802240299363}
   - component: {fileID: 7509401048336703641}
+  - component: {fileID: -2533176824806233902}
   m_Layer: 7
   m_Name: NorthBall
   m_TagString: NorthPolarity
@@ -180,3 +181,17 @@ CircleCollider2D:
   m_Offset: {x: -0.0012035072, y: 0}
   serializedVersion: 2
   m_Radius: 0.33889833
+--- !u!114 &-2533176824806233902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5538095410251914084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6667af1e7c4474c83ba74a7f65703c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  polarityRange: 2
+  magnetForce: 2

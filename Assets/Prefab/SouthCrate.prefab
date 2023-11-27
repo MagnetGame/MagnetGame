@@ -203,5 +203,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6667af1e7c4474c83ba74a7f65703c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  polarityRange: 1
+  polarityRange: 2
   magnetForce: 2
