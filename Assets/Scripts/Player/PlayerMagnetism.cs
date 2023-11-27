@@ -21,6 +21,7 @@ public class PlayerMagnetism : MonoBehaviour
 
 
     private playerState currentState = playerState.Neutral;
+    private playerState previousState = playerState.Neutral;
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
     
 
@@ -30,10 +31,6 @@ public class PlayerMagnetism : MonoBehaviour
         SouthMode,
         Neutral
     }
-
-
-    private playerState currentState = playerState.Neutral;
-    private playerState previousState = playerState.Neutral;
 
     void Start()
     {
