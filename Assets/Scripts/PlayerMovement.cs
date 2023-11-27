@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         bool hitRight = Physics2D.Raycast(feetPosition.position, Vector2.right, raycastRange, LayerMask.GetMask("Wall")).collider != null;
         bool hitUp = Physics2D.Raycast(feetPosition.position, Vector2.up, raycastRange*4, LayerMask.GetMask("Ceiling")).collider != null;
         bool hitDown = Physics2D.Raycast(feetPosition.position, Vector2.down, raycastRange, LayerMask.GetMask("Ground")).collider != null;
+        //todo check if player in air, and jump only lets player float/jump up very little
 
         if (hitLeft)
         {
