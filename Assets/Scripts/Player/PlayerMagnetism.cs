@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -77,21 +76,6 @@ public class PlayerMagnetism : MonoBehaviour
         }
         UpdateStateAnimation(currentState);
         previousState = currentState;
-
-        //TODO change player sprite for Polarity here 
-        switch (currentState)
-        {
-            case playerState.NorthMode:
-                //spriteRenderer.sprite = Resources.Load<Sprite>("NorthPlayer"); // Change to "NorthPlayer" sprite.
-                break;
-            case playerState.SouthMode:
-                //spriteRenderer.sprite = Resources.Load<Sprite>("SouthPlayer"); // Change to "SouthPlayer" sprite.
-                break;
-            case playerState.Neutral:
-                // You can set a default sprite or leave it as is.
-                break;
-        }
-
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //checking pull or push objects

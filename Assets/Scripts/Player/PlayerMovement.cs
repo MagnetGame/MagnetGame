@@ -22,9 +22,10 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Animator animator;
 
-    public AudioClip collid;
-    public AudioClip interactiableCollid;
-    private AudioSource effectsAudioSource; 
+    [SerializeField] private AudioClip collid;
+    [SerializeField] private AudioClip interactiableCollid;
+
+    private bool wasGrounded = false; 
 
     private enum playerWalkState
     {
@@ -98,9 +99,9 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector2.down * speed; // Move down
             }
         }
-        Debug.Log("player walk state is: " + currentWalkState);
+        //Debug.Log("player walk state is: " + currentWalkState);
 
-        isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, groundLayer);
+        isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, groundLayer).collider != null;
         hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
 
         if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) 
@@ -109,22 +110,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground" && isGrounded == false)
-        {
-            isGrounded = true;
-            effectsAudioSource.PlayOneShot(collid);
-        }
-        if (collision.gameObject.tag == "NorthPolarity" || collision.gameObject.tag == "NorthPolarity" || collision.gameObject.tag == "NeutralPolarity" && isGrounded == false)
-        {
-            effectsAudioSource.PlayOneShot(interactiableCollid);
-        }
-    }
-
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
+
+        isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, groundLayer).collider != null;
+        hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
+
+        if (hitInteractable && !wasGrounded)
+        {
+            SoundFXManager.Instance.PlaySoundFXClip(interactiableCollid, transform, 0.6f);
+        }
+        else if (isGrounded && !wasGrounded)
+        {
+            SoundFXManager.Instance.PlaySoundFXClip(collid, transform, 0.6f);
+        }
+
+        wasGrounded = isGrounded || hitInteractable;
     }
 
 
