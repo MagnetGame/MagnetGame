@@ -18,7 +18,6 @@ public class ObjectPolarityHandler : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
     }
 
-    //todo electo magnet with activation
     void Update()
     {
         polarityTag = gameObject.tag;
@@ -50,6 +49,7 @@ public class ObjectPolarityHandler : MonoBehaviour
                         colliderRB.AddForce(-force, ForceMode2D.Force);
                     }
                 }
+
 
             }
             else if ((polarityTag == "NorthPolarity" && colliderTag == "SouthPolarity") || (polarityTag == "SouthPolarity" && colliderTag == "NorthPolarity"))  //attraction 
