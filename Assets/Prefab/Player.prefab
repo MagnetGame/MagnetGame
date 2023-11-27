@@ -274,7 +274,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   spriteRenderer: {fileID: 8396413474768515444}
-  animator: {fileID: 2155217403110702240}
+  playerAnimator: {fileID: 2155217403110702240}
+  doorAnimator: {fileID: 0}
   collid: {fileID: 8300000, guid: 3fce60676489e094c9485da53de18dc2, type: 3}
   interactiableCollid: {fileID: 8300000, guid: bdd3660f21a4c4e48ab214d3ab22deee, type: 3}
 --- !u!114 &6977142372027583125
