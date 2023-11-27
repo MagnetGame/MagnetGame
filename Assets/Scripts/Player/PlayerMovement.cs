@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactableObjectsLayer;
     
     public SpriteRenderer spriteRenderer;
-    public Animator animator;
+    public Animator playerAnimator;
+    public Animator doorAnimator;
 
     [SerializeField] private AudioClip collid;
     [SerializeField] private AudioClip interactiableCollid;
@@ -48,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         move = Input.GetAxis("Horizontal"); 
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
-        animator.SetFloat("speed", Mathf.Abs(move));
+        playerAnimator.SetFloat("speed", Mathf.Abs(move));
 
         rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
 
@@ -130,12 +131,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Exit")
         {
             Debug.Log("found the exit");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            doorAnimator.SetBool("exiting", true);
+            Debug.Log("animator exiting codition is" + doorAnimator.GetBool("exiting"));
+         //   SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
