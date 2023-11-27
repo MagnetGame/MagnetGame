@@ -12,10 +12,16 @@ public class ObjectPolarityHandler : MonoBehaviour
     private string polarityTag; // The tag for this object, set in the Unity inspector.
     private string colliderTag = "";
     private Rigidbody2D myRigidbody;
+    private Vector2 renderSize;
+    private float size;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        renderSize = GetComponent<Collider2D>().bounds.size;
+        size = renderSize.x + renderSize.y;
+        polarityRange *= size;
+        magnetForce *= size;
     }
 
     void Update()

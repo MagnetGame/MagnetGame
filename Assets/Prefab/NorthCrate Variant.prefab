@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5214590834833472859, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
+      propertyPath: polarityRange
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5463097049366635227, guid: 6ce1674ec60545046b201adbf6674966, type: 3}
       propertyPath: m_Name
       value: NorthCrate Variant
