@@ -57,12 +57,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (move < 0) //flip sprite depending on which dir we move
         {
-            CreateDust();
+            if (rb.velocity.x > 2)
+            {
+                CreateDust();
+            }
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else if (move > 0) 
         {
-            CreateDust();
+            if (rb.velocity.x > 2)
+            {
+                CreateDust();
+            }
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
