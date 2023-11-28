@@ -26,7 +26,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip collid;
     [SerializeField] private AudioClip interactiableCollid;
 
-    private bool wasGrounded = false; 
+    private bool wasGrounded = false;
+
+    public ParticleSystem dust; 
 
     private enum playerWalkState
     {
@@ -55,11 +57,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (move < 0) //flip sprite depending on which dir we move
         {
-            spriteRenderer.flipX = false;
+            CreateDust();
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else if (move > 0) 
         {
-            spriteRenderer.flipX = true;
+            CreateDust();
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         bool hitLeft = Physics2D.Raycast(feetPosition.position, Vector2.left, raycastRange, LayerMask.GetMask("Wall")).collider != null;
@@ -107,14 +111,13 @@ public class PlayerMovement : MonoBehaviour
 
         if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) 
         {
+            CreateDust();
             rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
         }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(move * speed, rb.velocity.y);
-
         isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, groundLayer).collider != null;
         hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
 
@@ -146,6 +149,11 @@ public class PlayerMovement : MonoBehaviour
     public string GetCurrentWalkState()
     {
         return currentWalkState.ToString();
+    }
+
+    public void CreateDust()
+    {
+        dust.Play();
     }
 
 }
