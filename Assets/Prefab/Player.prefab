@@ -242,7 +242,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   spriteRenderer: {fileID: 9195418069487754413}
-  animator: {fileID: 7271450256668196279}
+  playerAnimator: {fileID: 7271450256668196279}
+  doorAnimator: {fileID: 0}
   collid: {fileID: 8300000, guid: 3fce60676489e094c9485da53de18dc2, type: 3}
   interactiableCollid: {fileID: 8300000, guid: bdd3660f21a4c4e48ab214d3ab22deee, type: 3}
 --- !u!114 &2248808982076018513
@@ -286,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3fc072b930e8742aa9a6b34fa096df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathUI: {fileID: 0}
 --- !u!1 &3136176065018187536
 GameObject:
   m_ObjectHideFlags: 0

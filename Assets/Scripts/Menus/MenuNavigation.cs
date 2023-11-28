@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class MenuNavigation : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+
+    public GameObject OptionsMenu;
     public GameObject PauseMenuUI;
     public void Start()
     {
@@ -39,6 +41,18 @@ public class MenuNavigation : MonoBehaviour
         GameIsPaused = false;
         PauseMenuUI.SetActive(GameIsPaused);
         Time.timeScale = 1f;
+    }
+
+    public void Options()
+    {
+        PauseMenuUI.SetActive(false);
+        OptionsMenu.SetActive(true);
+    }
+
+    public void Back()
+    {
+        OptionsMenu.SetActive(false);
+        PauseMenuUI.SetActive(true);
     }
     public void StartGame()
     {
