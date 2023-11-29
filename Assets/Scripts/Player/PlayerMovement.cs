@@ -13,12 +13,13 @@ public class PlayerMovement : MonoBehaviour
     private bool hitInteractable;
     private Rigidbody2D rb;
 
-    public Transform feetPosition;
+    public Transform headPosition;
     public float groundCheckCircleRadius;
     public float raycastRange;
     public LayerMask groundLayer;
     public LayerMask interactableObjectsLayer;
-    
+    private Vector2 spriteSize;
+
     public SpriteRenderer spriteRenderer;
     public Animator playerAnimator;
     public Animator doorAnimator;
@@ -27,8 +28,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip interactiableCollid;
 
     private bool wasGrounded = false;
+    public ParticleSystem dust;
 
-    public ParticleSystem dust; 
+    private bool hitLeft;
+    private bool hitRight;
+    private bool hitDown;
+    private bool hitUp;
 
     private enum playerWalkState
     {
@@ -44,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            spriteSize = spriteRenderer.bounds.size;
         }
 
     // Update is called once per frame
@@ -72,10 +78,14 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
-        bool hitLeft = Physics2D.Raycast(feetPosition.position, Vector2.left, raycastRange, LayerMask.GetMask("Wall")).collider != null;
-        bool hitRight = Physics2D.Raycast(feetPosition.position, Vector2.right, raycastRange, LayerMask.GetMask("Wall")).collider != null;
-        bool hitUp = Physics2D.Raycast(feetPosition.position, Vector2.up, raycastRange*4, LayerMask.GetMask("Ceiling")).collider != null;
-        bool hitDown = Physics2D.Raycast(feetPosition.position, Vector2.down, raycastRange, LayerMask.GetMask("Ground")).collider != null;
+        isGrounded = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 90, Vector2.down, 1, groundLayer);
+        hitInteractable = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 90, Vector2.down, 1, interactableObjectsLayer);
+
+
+        hitLeft = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Horizontal, 0, Vector2.left, 2, LayerMask.GetMask("Wall"));
+        hitRight = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Horizontal, 0, Vector2.right, 2, LayerMask.GetMask("Wall"));
+        hitUp = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 0, Vector2.up, 2, LayerMask.GetMask("Ceiling"));
+        hitDown = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 0, Vector2.down, 2, LayerMask.GetMask("Ground"));
 
         if (hitLeft)
         {
@@ -110,10 +120,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector2.down * speed; // Move down
             }
         }
-        //Debug.Log("player walk state is: " + currentWalkState);
+        Debug.Log("player walk state is: " + currentWalkState);
 
-        isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, groundLayer).collider != null;
-        hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
+        isGrounded = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 0, Vector2.down, 1, groundLayer);
+        hitInteractable = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 0, Vector2.down, 1, interactableObjectsLayer);
 
         if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) 
         {
@@ -124,8 +134,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, groundLayer).collider != null;
-        hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
+        isGrounded = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 0, Vector2.down, 1, groundLayer);
+        hitInteractable = Physics2D.CapsuleCast(headPosition.position, spriteSize, CapsuleDirection2D.Vertical, 0, Vector2.down, 1, interactableObjectsLayer);
 
         if (hitInteractable && !wasGrounded)
         {
