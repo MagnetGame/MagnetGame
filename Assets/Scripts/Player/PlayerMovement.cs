@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
- 
+
     public string GetCurrentWalkState()
     {
         return currentWalkState.ToString();
