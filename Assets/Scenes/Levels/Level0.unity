@@ -2806,6 +2806,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 7490190431781108735, guid: bf9c83be4103f2a4f8e6dd0074508e49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2883,6 +2887,14 @@ PrefabInstance:
     - target: {fileID: 2632122287712266011, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472141794977681346, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
+      propertyPath: m_Size.x
+      value: 0.33352372
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472141794977681346, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.14143182
       objectReference: {fileID: 0}
     - target: {fileID: 4549628469051848135, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: doorAnimator
