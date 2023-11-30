@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,12 +14,16 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     public Transform feetPosition;
-    public float groundCheckCircleRadius;
+    public float groundCheckDistance;
     public float raycastRange;
     public LayerMask groundLayer;
     public LayerMask interactableObjectsLayer;
     
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
+
+    public AudioClip collid;
+    private AudioSource effectsAudioSource; 
 
     private enum playerWalkState
     {
@@ -40,9 +45,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         move = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        animator.SetFloat("speed", Mathf.Abs(move));
+
         rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
 
-        if(move < 0) //flip sprite depending on which dir we move
+        if (move < 0) //flip sprite depending on which dir we move
         {
             spriteRenderer.flipX = false;
         }
@@ -53,8 +61,10 @@ public class PlayerMovement : MonoBehaviour
 
         bool hitLeft = Physics2D.Raycast(feetPosition.position, Vector2.left, raycastRange, LayerMask.GetMask("Wall")).collider != null;
         bool hitRight = Physics2D.Raycast(feetPosition.position, Vector2.right, raycastRange, LayerMask.GetMask("Wall")).collider != null;
-        bool hitUp = Physics2D.Raycast(feetPosition.position, Vector2.up, raycastRange*4, LayerMask.GetMask("Ceiling")).collider != null;
+        bool hitUp = Physics2D.Raycast(feetPosition.position, Vector2.up, raycastRange * 4, LayerMask.GetMask("Ceiling")).collider != null;
         bool hitDown = Physics2D.Raycast(feetPosition.position, Vector2.down, raycastRange, LayerMask.GetMask("Ground")).collider != null;
+
+        //Debug.Log("player walk state is: " + currentWalkState);
 
         if (hitLeft)
         {
@@ -73,10 +83,13 @@ public class PlayerMovement : MonoBehaviour
             currentWalkState = playerWalkState.Ground;
         }
 
-        if (hitLeft || hitRight)
+        if ((hitLeft || hitRight) )
         {
             // If there's a wall on the left or right, allow vertical movement
-            if ((Input.GetKeyUp("space"))){
+            
+
+            if ((Input.GetKeyUp("space")))
+            {
                 rb.velocity = Vector2.up * jumpForce;
             }
 
@@ -88,18 +101,36 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = Vector2.down * speed; // Move down
             }
+            
         }
-        Debug.Log("player walk state is: " + currentWalkState);
 
-        isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckCircleRadius, groundLayer);
-        //isOnInteractable = Physics.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer); //old ver using ciricle
-        hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
-        //Debug.Log("On interactable by raycast?" + hitInteractable);
+            //if not wall walking
+            //isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckDistance, groundLayer); //old version 
+            isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckDistance, groundLayer).collider != null;  // NOTE PLAYER HAS TO BE ON GROUND LAYER!
+            //Debug.Log("are we on ground? " + isGrounded);
+            //Debug.DrawRay(feetPosition.position, Vector2.down * groundCheckDistance, Color.red);
 
-        if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
+            //isOnInteractable = Physics.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer); //old ver using ciricle
+            hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckDistance, interactableObjectsLayer).collider != null;
+            //Debug.Log("Interactable obj below" + hitInteractable);
+
+            if((Input.GetKeyUp("space") && isGrounded) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
+            {
+                rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
+                //rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up 
+            }
+            else if ((hitInteractable && Input.GetKeyUp("space")))
+            {
+                //rb.velocity = Vector2.up * jumpForce;
+            }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isGrounded == false)
         {
-            //rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
-            rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
+            isGrounded = true;
+            effectsAudioSource.PlayOneShot(collid);
         }
     }
 
@@ -108,10 +139,22 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
     }
 
-
-    public string GetCurrentWalkState()
+    private void OnTriggerEnter(Collider other)
     {
-        return currentWalkState.ToString();
+        if (other.gameObject.tag == "Exit")
+        {
+            Debug.Log("found the exit");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Exit")
+        {
+            Debug.Log("stayed in exit zone");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
 }
