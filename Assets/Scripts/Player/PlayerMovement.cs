@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     
     public SpriteRenderer spriteRenderer;
     public Animator playerAnimator;
-    public Animator doorAnimator;
 
     [SerializeField] private AudioClip collid;
     [SerializeField] private AudioClip interactiableCollid;
@@ -100,12 +99,12 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector2.down * speed; // Move down
             }
         }
-        //Debug.Log("player walk state is: " + currentWalkState);
+        Debug.Log("player walk state is: " + currentWalkState);
 
         isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, groundLayer).collider != null;
         hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
-
-        if ( (Input.GetKeyUp("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) 
+        playerAnimator.SetBool("isGrounded", isGrounded);
+        if ( (Input.GetKeyDown("space") && isGrounded ) || (hitInteractable && Input.GetKeyUp("space"))) 
         {
             rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up
         }
@@ -114,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
-
+        Debug.Log("grounded? " + isGrounded);
         isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, groundLayer).collider != null;
         hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckCircleRadius, interactableObjectsLayer).collider != null;
 
@@ -129,19 +128,6 @@ public class PlayerMovement : MonoBehaviour
 
         wasGrounded = isGrounded || hitInteractable;
     }
-
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Exit")
-        {
-            Debug.Log("found the exit");
-            doorAnimator.SetBool("exiting", true);
-            Debug.Log("animator exiting codition is" + doorAnimator.GetBool("exiting"));
-         //   SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-    }
-
  
     public string GetCurrentWalkState()
     {
