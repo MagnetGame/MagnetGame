@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
 public class PlayerMagnetism : MonoBehaviour
 {
-    public float magnetRadius = 2f;
-    public float magnetForce = 3f;
+    public float magnetRadius = 5f;
+    public float magnetForce = 2f;
     public float maxAttractionDistance = 1f; // Maximum distance for attraction.
-    public float breakingForce = 8f; // Force applied to break attraction.
+    public float breakingForce = .1f; // Force applied to break attraction.
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
     public Sprite neutral, north, south;
@@ -20,11 +18,7 @@ public class PlayerMagnetism : MonoBehaviour
     private LineRenderer currentLineRenderer;
 
     private Rigidbody2D playerRigidbody;  // Rigidbody for the player.
-
-    [SerializeField] private AudioClip magnetismClip;
-    public Material lineMaterial;
-    public float lineLifeTime = 0.5f;
-
+    
     public enum playerState
     {
         NorthMode,
@@ -50,7 +44,6 @@ public class PlayerMagnetism : MonoBehaviour
             {
                 northParticles.Play();
             }
-            SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -60,7 +53,6 @@ public class PlayerMagnetism : MonoBehaviour
             {
                 southParticles.Play();
             }
-            SoundFXManager.Instance.PlaySoundFXClip(magnetismClip, transform, 0.6f);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -75,19 +67,33 @@ public class PlayerMagnetism : MonoBehaviour
         UpdateStateAnimation(currentState);
         previousState = currentState;
 
+        //TODO change player sprite for Polarity here 
+        switch (currentState)
+        {
+            case playerState.NorthMode:
+                //spriteRenderer.sprite = Resources.Load<Sprite>("NorthPlayer"); // Change to "NorthPlayer" sprite.
+                break;
+            case playerState.SouthMode:
+                //spriteRenderer.sprite = Resources.Load<Sprite>("SouthPlayer"); // Change to "SouthPlayer" sprite.
+                break;
+            case playerState.Neutral:
+                // You can set a default sprite or leave it as is.
+                break;
+        }
+
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //checking pull or push objects
         if (currentState == playerState.NorthMode || currentState == playerState.SouthMode)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, magnetRadius);
-
             foreach (Collider2D collider in colliders)
             {
+                //TODO wall walking, hmm
                 if ((collider.name == "ElectroMagnet"))
                 {
                     continue;
                 }
-
                 //regular polarity
                 else if ((currentState == playerState.NorthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.SouthMode && collider.CompareTag("SouthPolarity"))) // handles push 
                 {
@@ -106,6 +112,8 @@ public class PlayerMagnetism : MonoBehaviour
                 }
                 else if ((currentState == playerState.SouthMode && collider.CompareTag("NorthPolarity")) || (currentState == playerState.NorthMode && collider.CompareTag("SouthPolarity"))) // handles pull
                 {
+                    //TODO CHECK IF NOT ELECTRO MAGNET
+
                     //Debug.Log("in pull mode");
                     Vector2 direction = collider.transform.position - transform.position; //from collider to 
                     float distance = direction.magnitude;
@@ -113,10 +121,10 @@ public class PlayerMagnetism : MonoBehaviour
 
                     //begin break force code when player on top
                     Vector2 breakDirectionVector = Vector2.zero;
-                    if (Input.GetKeyUp("space"))
+                    if (Input.GetKeyUp("space")) 
                     {
                         //TODO breaking force might need work
-
+                        
                         breakDirectionVector = new Vector2(0.0f, 1.0f); // Upwards direction
                         if (objectRigidbody != null)
                         {
@@ -134,20 +142,16 @@ public class PlayerMagnetism : MonoBehaviour
 
 
                     Vector2 force = direction.normalized * (magnetForce * 0.5f); // Half the force.
-                    playerRigidbody.AddForce(force, ForceMode2D.Impulse);
+                    playerRigidbody.AddForce( force, ForceMode2D.Impulse);
                     if (objectRigidbody != null)
                     {
-                        objectRigidbody.AddForce(-force, ForceMode2D.Impulse);
+                        objectRigidbody.AddForce( -force, ForceMode2D.Impulse);
                         //playerRigidbody.AddForce(force, ForceMode2D.Impulse);
                     }
                     //end of attraction code
 
                 }
 
-                if (collider.CompareTag("NorthPolarity") || collider.CompareTag("SouthPolarity"))
-                {
-                    UpdateLine(collider.transform);
-                }
             }
         }
         
@@ -174,44 +178,4 @@ public class PlayerMagnetism : MonoBehaviour
                 break;
         }
     }
-
-    // Instantiate or update the LineRenderer.
-    private void UpdateLine(Transform target)
-    {
-        LineManager lineManager = target.GetComponent<LineManager>();
-
-        if (lineManager == null)
-        {
-            GameObject lineObject = new GameObject("Line");
-            LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
-            lineManager = lineObject.AddComponent<LineManager>();
-            lineManager.SetUpLine(new Transform[] { transform, target });
-
-            // Set LineRenderer properties
-            SetLineRendererProperties(lineRenderer, target.tag);
-            Destroy(lineManager.gameObject, lineLifeTime);
-        }
-        else
-        {
-            lineManager.SetUpLine(new Transform[] { transform, target });
-            Destroy(lineManager.gameObject, lineLifeTime);
-        }
-    }
-
-    private void SetLineRendererProperties(LineRenderer lineRenderer, string polarityTag)
-    {
-        // Set width to 1/3rd of its normal size
-        lineRenderer.startWidth = 0.20f;
-        lineRenderer.endWidth = 0.20f;
-
-        lineRenderer.material = lineMaterial;
-
-        // Set color based on polarity
-        Color startColor = polarityTag == "NorthPolarity" ? new Color(1, 0, 0, 0.5f) : new Color(0, 0, 1, 0.5f);
-        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // Gradient to 0 alpha
-
-        lineRenderer.startColor = startColor;
-        lineRenderer.endColor = endColor;
-    }
 }
-
