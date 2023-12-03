@@ -9,6 +9,8 @@ TagManager:
   - SouthPolarity
   - NeutralPolarity
   - Exit
+  - Door
+  - DoorController
   layers:
   - Default
   - TransparentFX

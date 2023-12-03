@@ -2768,7 +2768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5101620361109671894, guid: bf9c83be4103f2a4f8e6dd0074508e49, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9037497
+      value: -2.1192608
       objectReference: {fileID: 0}
     - target: {fileID: 5101620361109671894, guid: bf9c83be4103f2a4f8e6dd0074508e49, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2805,6 +2805,10 @@ PrefabInstance:
     - target: {fileID: 7490190431781108735, guid: bf9c83be4103f2a4f8e6dd0074508e49, type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490190431781108735, guid: bf9c83be4103f2a4f8e6dd0074508e49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2883,6 +2887,14 @@ PrefabInstance:
     - target: {fileID: 2632122287712266011, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472141794977681346, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
+      propertyPath: m_Size.x
+      value: 0.33352372
+      objectReference: {fileID: 0}
+    - target: {fileID: 4472141794977681346, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.14143182
       objectReference: {fileID: 0}
     - target: {fileID: 4549628469051848135, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: doorAnimator
@@ -2975,9 +2987,9 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1593578528}
-  - {fileID: 201538859}
   - {fileID: 2124062002}
+  - {fileID: 201538859}
+  - {fileID: 1593578528}
   - {fileID: 6212296906438087764}
   - {fileID: 1650735831}
   - {fileID: 683885868}
