@@ -9,11 +9,13 @@ TagManager:
   - SouthPolarity
   - NeutralPolarity
   - Exit
+  - Door
+  - DoorController
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Door
+  - 
   - Water
   - UI
   - Ground
@@ -43,12 +45,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 390620605
-    locked: 0
-  - name: Door
-    uniqueID: 205941225
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
