@@ -264,7 +264,8 @@ MonoBehaviour:
   speed: 4
   jumpForce: 12
   feetPosition: {fileID: 7107777581881316761}
-  groundCheckCircleRadius: 0.75
+  groundCheckDistance: 0
+  raycastRange: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -273,6 +274,7 @@ MonoBehaviour:
     m_Bits: 128
   spriteRenderer: {fileID: 8396413474768515444}
   animator: {fileID: 2155217403110702240}
+  collid: {fileID: 0}
 --- !u!114 &6977142372027583125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,11 +287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39db19e37019bc48b3ed057da502c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magnetRadius: 1
-  magnetForce: 1
+  magnetRadius: 2
+  magnetForce: 3
   maxAttractionDistance: 1
   breakingForce: 16
-  targetLayer: Ground
   spriteRenderer: {fileID: 8396413474768515444}
   neutral: {fileID: -1334558117, guid: da6f6a25755f1724e92124520a751a6d, type: 3}
   north: {fileID: 1389394136, guid: 135d9ed02c45b184e9250b4b378dea93, type: 3}
@@ -298,6 +299,7 @@ MonoBehaviour:
   northParticles: {fileID: 5361382404961401507}
   southParticles: {fileID: 1866461139440495670}
   lineRendererPrefab: {fileID: 0}
+  currentState: 2
 --- !u!1 &4006920224604385260
 GameObject:
   m_ObjectHideFlags: 0
@@ -10256,4 +10258,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
-

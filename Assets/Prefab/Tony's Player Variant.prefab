@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2632122287712266011, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: m_Name
-      value: Player Variant
+      value: Tony's Player Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2632122287712266011, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: m_Layer
@@ -142,6 +142,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: magnetForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
+      propertyPath: magnetRadius
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}

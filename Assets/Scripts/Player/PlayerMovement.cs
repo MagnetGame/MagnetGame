@@ -47,21 +47,8 @@ public class PlayerMovement : MonoBehaviour
         move = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
         animator.SetFloat("speed", Mathf.Abs(move));
-        rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
 
-        /*
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            move = -1f; // Set move to -1 when the left arrow key is pressed
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            move = 1f; // Set move to 1 when the right arrow key is pressed
-        }
-        else
-        {
-            move = 0f; // Set move to 0 when no arrow key is pressed
-        }*/
+        rb.velocity = new Vector2(move * speed, rb.velocity.y); //retains previous rigidbody Y veloctiy
 
         if (move < 0) //flip sprite depending on which dir we move
         {
@@ -117,17 +104,16 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-            //if not wall walking
-            //isGrounded = Physics2D.OverlapCircle(feetPosition.position, groundCheckDistance, groundLayer); //old version 
-            isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckDistance, groundLayer).collider != null;  // NOTE PLAYER HAS TO BE ON GROUND LAYER!
-            //Debug.Log("are we on ground? " + isGrounded);
-            //Debug.DrawRay(feetPosition.position, Vector2.down * groundCheckDistance, Color.red);
-
-            //isOnInteractable = Physics.OverlapCircle(feetPosition.position, groundCheckCircleRadius, interactableObjectsLayer); //old ver using ciricle
+            //isGrounded = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckDistance, groundLayer).collider != null;
             hitInteractable = Physics2D.Raycast(feetPosition.position, Vector2.down, groundCheckDistance, interactableObjectsLayer).collider != null;
-            //Debug.Log("Interactable obj below" + hitInteractable);
 
-            if((Input.GetKeyUp("space") && isGrounded) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
+            Vector2 boxSize = new Vector2(0.8f, 0.6f);
+            RaycastHit2D[] hits = Physics2D.BoxCastAll(feetPosition.position, boxSize, 0f, Vector2.down, raycastRange, LayerMask.GetMask("Ground"));
+            // Check if any of the rays hit the ground
+            isGrounded = hits.Length > 0;
+
+
+        if ((Input.GetKeyUp("space") && isGrounded) || (hitInteractable && Input.GetKeyUp("space"))) //old ver  if ( (Input.GetKeyUp("space") && isGrounded ) || (isOnInteractable && Input.GetKeyUp("space"))) 
             {
                 rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Vector2.up.y), ForceMode2D.Impulse);
                 //rb.velocity = Vector2.up * jumpForce;  //only change Y velocity while not changing the x velocty, cuase vector2.up 

@@ -13,7 +13,7 @@ public class Electromagnet : MonoBehaviour
 
     private string polarityTag;
     private string colliderTag = "";
-    private string playerStateName = "";
+    //private string playerStateName = "";
     private bool isMagnetismActive = false;
 
     private string currentPlayerStateString = "";

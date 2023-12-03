@@ -1870,7 +1870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.59
+      value: 3.91
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1936,7 +1936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.5
+      value: -5.74
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2317,15 +2317,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5114147679846918791, guid: 2bfabdc0a2b566a4ab6f1f16bfa55aae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.62
+      value: 5.08
       objectReference: {fileID: 0}
     - target: {fileID: 5114147679846918791, guid: 2bfabdc0a2b566a4ab6f1f16bfa55aae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.38
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 5114147679846918791, guid: 2bfabdc0a2b566a4ab6f1f16bfa55aae, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0822876
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5114147679846918791, guid: 2bfabdc0a2b566a4ab6f1f16bfa55aae, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2358,6 +2358,14 @@ PrefabInstance:
     - target: {fileID: 5538095410251914084, guid: 2bfabdc0a2b566a4ab6f1f16bfa55aae, type: 3}
       propertyPath: m_Name
       value: NorthBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509401048336703641, guid: 2bfabdc0a2b566a4ab6f1f16bfa55aae, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509401048336703641, guid: 2bfabdc0a2b566a4ab6f1f16bfa55aae, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2652,7 +2660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.15
+      value: 23.4
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2713,7 +2721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.56
+      value: 13.69
       objectReference: {fileID: 0}
     - target: {fileID: 4419135103125389245, guid: 9e220b60ab929b04a9912ddfd5b40a0d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2831,7 +2839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: magnetRadius
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6977142372027583125, guid: 4320ba0d0f286dd4f80c305363229417, type: 3}
       propertyPath: lineRendererPrefab
