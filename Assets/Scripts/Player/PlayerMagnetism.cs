@@ -7,8 +7,6 @@ public class PlayerMagnetism : MonoBehaviour
     public float magnetForce = 2f;
     public float maxAttractionDistance = 1f; // Maximum distance for attraction.
     public float breakingForce = .1f; // Force applied to break attraction.
-    public float raycastDistance = .5f;
-    public float wallDetectDistane = .2f;
     public SpriteRenderer spriteRenderer; //sprite rendered for player
 
     public Sprite neutral, north, south;
