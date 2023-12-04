@@ -45,12 +45,14 @@ public class MenuNavigation : MonoBehaviour
 
     public void Options()
     {
+        Time.timeScale = 0f;
         PauseMenuUI.SetActive(false);
         OptionsMenu.SetActive(true);
     }
 
     public void Back()
     {
+        Time.timeScale = 0f;
         OptionsMenu.SetActive(false);
         PauseMenuUI.SetActive(true);
     }
@@ -68,6 +70,7 @@ public class MenuNavigation : MonoBehaviour
 
     public void Retry()
     {
+        Time.timeScale = 0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
